@@ -1,9 +1,9 @@
 "use client";
-
+import {BackgroundBeams} from "@/app/components/ui/background-beams";
 import { useState } from "react";
 import quotes from "@/data/quotes.json";
 
-const About = () => {
+export default function BackgroundBeamsDemo() {
   const [index, setIndex] = useState(0);
 
   const nextQuote = () => {
@@ -47,8 +47,9 @@ const About = () => {
           Next
         </button>
       </div>
+      <BackgroundBeams />
     </div>
   );
 };
 
-export default About;
+

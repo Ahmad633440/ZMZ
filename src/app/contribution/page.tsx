@@ -1,10 +1,12 @@
 "use client";
-
+import { motion } from "motion/react";
+import React from "react";
+import { AuroraBackground } from "@/app/components/ui/aurora-background";
 import { useState, useEffect } from "react";
 
 const COOLDOWN_SECONDS = 120;
 
-const Contribution = () => {
+export default function AuroraBackgroundDemo() {
   const [quote, setQuote] = useState("");
   const [author, setAuthor] = useState("");
 
@@ -93,13 +95,16 @@ const Contribution = () => {
   const isCoolingDown = cooldownUntil && cooldownUntil > Date.now();
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-6">
+    // <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-6">
+    <AuroraBackground>
+
+   
       {/* Heading */}
-      <h1 className="text-4xl font-bold mb-4 mt-16">
+      <h1 className="text-4xl font-bold mb-4 mt-16 text-white">
         Submit a Quote 
       </h1>
 
-      <p className="text-center opacity-70 max-w-md mb-10">
+      <p className="text-center opacity-70 max-w-md mb-10 text-gray-300">
         Drop your demotivational quote here.
         If it’s good, I’ll add it manually.
       </p>
@@ -111,7 +116,7 @@ const Contribution = () => {
       >
         {/* Quote */}
         <div className="flex flex-col gap-2">
-          <label className="opacity-70">Your Quote</label>
+          <label className="opacity-70 text-white">Your Quote</label>
           <input
             value={quote}
             onChange={(e) => setQuote(e.target.value)}
@@ -124,12 +129,12 @@ const Contribution = () => {
 
         {/* Author */}
         <div className="flex flex-col gap-2">
-          <label className="opacity-70">Author (optional)</label>
+          <label className="opacity-70 text-white">Author (optional)</label>
           <input
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
             disabled={!!isCoolingDown}
-            placeholder="Your name (or leave blank)"
+            placeholder="Your name"
             className="p-3 rounded-xl bg-black border border-white/30 text-white disabled:opacity-40"
           />
         </div>
@@ -151,11 +156,12 @@ const Contribution = () => {
         )}
       </form>
 
-      <p className="mt-8 text-sm opacity-50 text-center max-w-sm">
+      <p className="mt-8 text-sm opacity-50 text-center max-w-sm text-gray-300">
         Submissions are reviewed manually. Spam will be ignored.
       </p>
-    </div>
+    {/* </div> */}
+     </AuroraBackground>
   );
 };
 
-export default Contribution;
+
