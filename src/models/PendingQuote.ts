@@ -1,12 +1,20 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose from "mongoose";
 
-const PendingQuoteSchema = new Schema(
+const PendingSchema = new mongoose.Schema(
   {
-    text: { type: String, required: true },
-    author: { type: String, default: "Anonymous" },
+    text: {
+      type: String,
+      required: true,
+      trim: true
+    },
+    author: {
+      type: String,
+      default: "Anonymous",
+      trim: true
+    }
   },
   { timestamps: true }
 );
 
 export default mongoose.models.PendingQuote ||
-  mongoose.model("PendingQuote", PendingQuoteSchema);
+  mongoose.model("PendingQuote", PendingSchema);

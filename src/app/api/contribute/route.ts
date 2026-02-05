@@ -1,31 +1,43 @@
 import { NextResponse } from "next/server";
-import { connectDB } from "@/lib/mongodb";
+import connectDB from "@/lib/mongodb";
 import PendingQuote from "@/models/PendingQuote";
 
 export async function POST(req: Request) {
   try {
-    await connectDB();
+    console.log("📨 POST /api/contribute received");
 
     const body = await req.json();
-    const { text, author } = body;
+    console.log("📦 Body parsed:", body);
 
-    if (!text || text.trim().length === 0) {
+    if (!body.text || !body.text.trim()) {
+      console.log("❌ Validation failed: text empty");
       return NextResponse.json(
-        { message: "Quote is required" },
+        { error: "Quote text is required" },
         { status: 400 }
       );
     }
 
-    await PendingQuote.create({
-      text: text.trim(),
-      author: author?.trim() || "Anonymous",
-    });
+    console.log("🔗 Connecting to MongoDB...");
+    await connectDB();
+    console.log("✅ MongoDB connected");
 
-    return NextResponse.json({ success: true });
+    const quoteData = {
+      text: body.text.trim(),
+      author: body.author?.trim() || "Anonymous",
+    };
+
+    console.log("💾 Saving:", quoteData);
+    const quote = await PendingQuote.create(quoteData);
+    console.log("✅ Saved to DB:", quote._id);
+
+    return NextResponse.json({ ok: true, quote }, { status: 201 });
   } catch (error) {
+    console.error("❌ Route error:", error);
     return NextResponse.json(
-      { message: "Server error" },
+      { error: error instanceof Error ? error.message : "Server error" },
       { status: 500 }
     );
   }
 }
+
+

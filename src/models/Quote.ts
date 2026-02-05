@@ -1,9 +1,17 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose from "mongoose";
 
-const QuoteSchema = new Schema(
+const QuoteSchema = new mongoose.Schema(
   {
-    text: { type: String, required: true },
-    author: { type: String, default: "Def" },
+    text: {
+      type: String,
+      required: true,
+      trim: true
+    },
+    author: {
+      type: String,
+      default: "Anonymous",
+      trim: true
+    }
   },
   { timestamps: true }
 );
