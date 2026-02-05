@@ -29,6 +29,14 @@ Tailwind CSS
 
 Vercel
 
+Running Locally 
+npm install
+npm run dev
+
+Create a .env.local file and add:
+MONGO_URI=your_mongodb_connection_string
+
+
 Live Site
 
 https://zmz-wheat.vercel.app
