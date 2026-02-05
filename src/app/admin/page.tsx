@@ -24,25 +24,40 @@ const AdminPage = () => {
 
   const handleApprove = async (id: string) => {
     try {
-      await fetch(`/api/admin/approve`, {
+      console.log("📨 Approving:", id);
+      const res = await fetch(`/api/admin/approve`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ quoteId: id }),
       });
-      fetchPendingQuotes();
+
+      const data = await res.json();
+      console.log("✅ Response:", data);
+
+      if (res.ok) {
+        console.log("✅ Quote approved, refreshing list...");
+        fetchPendingQuotes();
+      } else {
+        console.error("❌ Approve failed:", data.error);
+      }
     } catch (error) {
-      console.error("Failed to approve:", error);
+      console.error("❌ Network error:", error);
     }
   };
 
   const handleReject = async (id: string) => {
     try {
-      await fetch(`/api/admin/reject`, {
+      console.log("📨 Rejecting:", id);
+      const res = await fetch(`/api/admin/reject`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ quoteId: id }),
       });
-      fetchPendingQuotes();
+
+      if (res.ok) {
+        console.log("✅ Quote rejected, refreshing list...");
+        fetchPendingQuotes();
+      }
     } catch (error) {
       console.error("Failed to reject:", error);
     }
@@ -72,13 +87,13 @@ const AdminPage = () => {
               <div className="flex gap-3">
                 <button
                   onClick={() => handleApprove(quote._id)}
-                  className="px-4 py-2 rounded-xl bg-green-600 text-black font-semibold hover:bg-green-700 transition"
+                  className="px-4 py-2 rounded-xl bg-green-600 text-white font-semibold hover:bg-green-700 transition"
                 >
                   Approve
                 </button>
                 <button
                   onClick={() => handleReject(quote._id)}
-                  className="px-4 py-2 rounded-xl bg-red-600 text-black font-semibold hover:bg-red-700 transition"
+                  className="px-4 py-2 rounded-xl bg-red-600 text-white font-semibold hover:bg-red-700 transition"
                 >
                   Reject
                 </button>

@@ -5,26 +5,32 @@ import Quote from "@/models/Quote";
 
 export async function POST(req: Request) {
   try {
-    const { quoteId } = await req.json();
-    console.log("✅ Approving:", quoteId);
+    const body = await req.json();
+    const quoteId = body.quoteId || body.id;
+    
+    console.log("✅ Approving quote ID:", quoteId);
 
     await connectDB();
 
-    const doc = await PendingQuote.findById(quoteId);
+    const pending = await PendingQuote.findById(quoteId);
 
-    if (!doc) {
+    if (!pending) {
+      console.log("❌ Quote not found");
       return NextResponse.json(
         { error: "Quote not found" },
         { status: 404 }
       );
     }
 
+    console.log("📦 Moving quote:", pending.text);
     await Quote.create({
-      text: doc.text,
-      author: doc.author
+      text: pending.text,
+      author: pending.author
     });
+    console.log("✅ Added to Quote collection");
 
     await PendingQuote.findByIdAndDelete(quoteId);
+    console.log("✅ Deleted from PendingQuote collection");
 
     return NextResponse.json({ ok: true });
   } catch (error) {
