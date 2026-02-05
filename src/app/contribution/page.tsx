@@ -63,6 +63,7 @@ export default function AuroraBackgroundDemo() {
     if (isCoolingDown) return;
 
     try {
+      console.log("📨 Submitting quote...");
       const res = await fetch("/api/contribute", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -72,32 +73,28 @@ export default function AuroraBackgroundDemo() {
         }),
       });
 
+      console.log("📦 Response status:", res.status);
       const data = await res.json();
+      console.log("📦 Response data:", data);
 
       if (!res.ok) {
-        setMessage("Server rejected submission.");
+        setMessage(`Error: ${data.error || "Server rejected submission."}`);
         return;
       }
 
-      console.log("API response:", data);
-
-      setMessage("Submitted. Awaiting approval.");
+      setMessage("✅ Submitted. Awaiting approval.");
 
       setQuote("");
       setAuthor("");
 
-      const expiry =
-        Date.now() + COOLDOWN_SECONDS * 1000;
+      const expiry = Date.now() + COOLDOWN_SECONDS * 1000;
 
-      localStorage.setItem(
-        "cooldownUntil",
-        expiry.toString()
-      );
+      localStorage.setItem("cooldownUntil", expiry.toString());
       setCooldownUntil(expiry);
 
     } catch (err) {
-      console.error(err);
-      setMessage("Network error.");
+      console.error("❌ Network error:", err);
+      setMessage("Network error. Check console.");
     }
   };
 
@@ -111,7 +108,7 @@ export default function AuroraBackgroundDemo() {
 
       <p className="text-center opacity-70 max-w-md mb-10 text-gray-300">
         Drop your demotivational quote here.
-        If it’s good, it gets approved.
+        If it's good, it gets approved.
       </p>
 
       {/* Form */}
@@ -122,7 +119,7 @@ export default function AuroraBackgroundDemo() {
         {/* Quote */}
         <div className="flex flex-col gap-2">
           <label className="opacity-70 text-white">
-            Your Quote
+            Quote
           </label>
 
           <input

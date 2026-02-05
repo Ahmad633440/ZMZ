@@ -10,8 +10,9 @@ export async function POST(req: Request) {
 
     await connectDB();
 
-    const pending = await PendingQuote.findById(quoteId);
-    if (!pending) {
+    const doc = await PendingQuote.findById(quoteId);
+
+    if (!doc) {
       return NextResponse.json(
         { error: "Quote not found" },
         { status: 404 }
@@ -19,13 +20,11 @@ export async function POST(req: Request) {
     }
 
     await Quote.create({
-      text: pending.text,
-      author: pending.author
+      text: doc.text,
+      author: doc.author
     });
-    console.log("✅ Moved to Quote collection");
 
     await PendingQuote.findByIdAndDelete(quoteId);
-    console.log("✅ Deleted from PendingQuote");
 
     return NextResponse.json({ ok: true });
   } catch (error) {
