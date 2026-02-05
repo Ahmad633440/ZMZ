@@ -60,8 +60,12 @@ export default function AuroraBackgroundDemo() {
       return;
     }
 
-    if (isCoolingDown) return;
+    // SET COOLDOWN IMMEDIATELY - BEFORE SUBMIT
+    const expiry = Date.now() + COOLDOWN_SECONDS * 1000;
+    localStorage.setItem("cooldownUntil", expiry.toString());
+    setCooldownUntil(expiry);
 
+    // NOW submit
     try {
       console.log("📨 Submitting quote...");
       const res = await fetch("/api/contribute", {
@@ -83,14 +87,8 @@ export default function AuroraBackgroundDemo() {
       }
 
       setMessage("✅ Submitted. Awaiting approval.");
-
       setQuote("");
       setAuthor("");
-
-      const expiry = Date.now() + COOLDOWN_SECONDS * 1000;
-
-      localStorage.setItem("cooldownUntil", expiry.toString());
-      setCooldownUntil(expiry);
 
     } catch (err) {
       console.error("❌ Network error:", err);

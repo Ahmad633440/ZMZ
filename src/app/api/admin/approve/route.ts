@@ -11,16 +11,14 @@ export async function POST(req: Request) {
     const quoteId = body.quoteId || body.id;
     
     console.log("📨 [APPROVE] Quote ID:", quoteId);
-    console.log("📨 [APPROVE] Connecting to MongoDB...");
 
     await connectDB();
     console.log("✅ [APPROVE] MongoDB connected");
 
-    console.log("📨 [APPROVE] Searching PendingQuote...");
     const pending = await PendingQuote.findById(quoteId);
 
     if (!pending) {
-      console.log("❌ [APPROVE] Quote not found in PendingQuote collection");
+      console.log("❌ [APPROVE] Quote not found");
       return NextResponse.json(
         { error: "Quote not found" },
         { status: 404 }
@@ -28,20 +26,21 @@ export async function POST(req: Request) {
     }
 
     console.log("✅ [APPROVE] Found pending quote:", pending.text);
-    console.log("📨 [APPROVE] Creating in Quote collection...");
-    
-    const created = await Quote.create({
+
+    // Create in Quote collection
+    const newQuote = new Quote({
       text: pending.text,
       author: pending.author
     });
-    
-    console.log("✅ [APPROVE] Quote created in Quote collection:", created._id);
-    console.log("📨 [APPROVE] Deleting from PendingQuote...");
 
-    const deleted = await PendingQuote.findByIdAndDelete(quoteId);
-    console.log("✅ [APPROVE] Deleted from PendingQuote:", deleted._id);
+    await newQuote.save();
+    console.log("✅ [APPROVE] Saved to Quote collection:", newQuote._id);
 
-    return NextResponse.json({ ok: true, quoteId: created._id });
+    // Delete from PendingQuote
+    await PendingQuote.findByIdAndDelete(quoteId);
+    console.log("✅ [APPROVE] Deleted from PendingQuote");
+
+    return NextResponse.json({ ok: true, quoteId: newQuote._id });
   } catch (error) {
     console.error("❌ [APPROVE] ERROR:", error);
     return NextResponse.json(

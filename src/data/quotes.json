@@ -1,111 +1,27 @@
-[
-  {
-    "text": "You don’t need more time. You need fewer excuses.",
-    "author": "Ahmad"
-  },
-  {
-    "text": "Ambition is real. Actions are fake.",
-    "author": "Anonymous"
-  },
-  {
-    "text": "Keep working hard. One day you will give up.",
-    "author": "Ahmad"
-  },
-  {
-    "text": "If at first you don’t succeed… lower your standards.",
-    "author": "Stupid Fox (inspired by 'The Fox and the Grapes')"
-  },
-  {
-    "text": "Don’t worry, it gets worse.",
-    "author": "Ahmad"
-  },
-  {
-    "text": "Be weaker than your excuses. It’s easier.",
-    "author": "Ali"
-  },
-  {
-    "text": "Success is overrated. Sleep is real.",
-    "author": "Jobeless boy (practically proven)"
-  },
-  {
-    "text": "Work smart, not hard. Or better… don’t work at all.",
-    "author": "Meer Ali"
-  },
-  {
-    "text": "Motivation is temporary. Laziness is forever.",
-    "author": "Ahmad"
-  },
-  {
-    "text": "Chase your dreams. They’re faster than you.",
-    "author": "Dreamer"
-  },
-  {
-    "text": "Failure builds character. Good thing you’re building a lot.",
-    "author": "Ahmad"
-  },
-  {
-    "text": "Try less. Disappoint fewer.",
-    "author": "Ahmad"
-  },
-  {
-    "text": "Give up. It’s cheaper.",
-    "author": "Ahmad"
-  },
-  {
-    "text": "Never be the fastest worker. You’ll become the default worker.",
-    "author": "Truth Seeker"
-  },
-  {
-    "text": "The corporate ladder is just stress with better titles.",
-    "author": "X Employee"
-  },
-  {
-    "text": "Stay average. It’s safe.",
-    "author": "Meer Rehan Ahmad Mallah"
-  },
-  {
-    "text": "Do nothing. It’s consistent.",
-    "author": "Ahmad"
-  },
-  {
-    "text": "If you finish early, add ‘pending review’ and relax.",
-    "author": "Corporate Labour"
-  },
-  {
-    "text": "Keep trying. Failure loves consistency.",
-    "author": "Ahmad"
-  },
-  {
-    "text": "Motivation is fake. Nap is real.",
-    "author": "Ahmad"
-  },
-  {
-    "text": "You can’t fail if you never start.",
-    "author": "Anonymous"
-  },
-  {
-    "text": "Try again. Make it worse.",
-    "author": "Ahmad"
-  },
-  {
-    "text": "At least you tried. That’s enough embarrassment.",
-    "author": "Meer Rehan Ahmad Mallah"
-  },
-  {
-    "text": "Work hard? Nah. Look busy. That’s the promotion strategy.",
-    "author": "Ahmad"
-  },
-  {
-    "text": "Never solve a problem too well. They’ll make it your job forever.",
-    "author": "Ahmad"
-  },
-  {
-    "text": "Managers don’t want results. They want updates.",
-    "author": "Ahmad"
-  },
-  {
-    "text": "Productivity is optional. Attendance is mandatory.",
-    "author": "Corporate Labour Union"
-  }
-] 
-
+{"text":"You don't need more time. You need fewer excuses.","author":"Ahmad"}
+{"text":"Ambition is real. Actions are fake.","author":"Anonymous"}
+{"text":"Keep working hard. One day you will give up.","author":"Ahmad"}
+{"text":"If at first you don't succeed… lower your standards.","author":"Stupid Fox (inspired by 'The Fox and the Grapes')"}
+{"text":"Don't worry, it gets worse.","author":"Ahmad"}
+{"text":"Be weaker than your excuses. It's easier.","author":"Ali"}
+{"text":"Success is overrated. Sleep is real.","author":"Jobeless boy (practically proven)"}
+{"text":"Work smart, not hard. Or better… don't work at all.","author":"Meer Ali"}
+{"text":"Motivation is temporary. Laziness is forever.","author":"Ahmad"}
+{"text":"Chase your dreams. They're faster than you.","author":"Dreamer"}
+{"text":"Failure builds character. Good thing you're building a lot.","author":"Ahmad"}
+{"text":"Try less. Disappoint fewer.","author":"Ahmad"}
+{"text":"Give up. It's cheaper.","author":"Ahmad"}
+{"text":"Never be the fastest worker. You'll become the default worker.","author":"Truth Seeker"}
+{"text":"The corporate ladder is just stress with better titles.","author":"X Employee"}
+{"text":"Stay average. It's safe.","author":"Meer Rehan Ahmad Mallah"}
+{"text":"Do nothing. It's consistent.","author":"Ahmad"}
+{"text":"If you finish early, add 'pending review' and relax.","author":"Corporate Labour"}
+{"text":"Keep trying. Failure loves consistency.","author":"Ahmad"}
+{"text":"Motivation is fake. Nap is real.","author":"Ahmad"}
+{"text":"You can't fail if you never start.","author":"Anonymous"}
+{"text":"Try again. Make it worse.","author":"Ahmad"}
+{"text":"At least you tried. That's enough embarrassment.","author":"Meer Rehan Ahmad Mallah"}
+{"text":"Work hard? Nah. Look busy. That's the promotion strategy.","author":"Ahmad"}
+{"text":"Never solve a problem too well. They'll make it your job forever.","author":"Ahmad"}
+{"text":"Managers don't want results. They want updates.","author":"Ahmad"}
+{"text":"Productivity is optional. Attendance is mandatory.","author":"Corporate Labour Union"}
