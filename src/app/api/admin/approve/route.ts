@@ -5,36 +5,45 @@ import Quote from "@/models/Quote";
 
 export async function POST(req: Request) {
   try {
+    console.log("📨 [APPROVE] Request received");
+    
     const body = await req.json();
     const quoteId = body.quoteId || body.id;
     
-    console.log("✅ Approving quote ID:", quoteId);
+    console.log("📨 [APPROVE] Quote ID:", quoteId);
+    console.log("📨 [APPROVE] Connecting to MongoDB...");
 
     await connectDB();
+    console.log("✅ [APPROVE] MongoDB connected");
 
+    console.log("📨 [APPROVE] Searching PendingQuote...");
     const pending = await PendingQuote.findById(quoteId);
 
     if (!pending) {
-      console.log("❌ Quote not found");
+      console.log("❌ [APPROVE] Quote not found in PendingQuote collection");
       return NextResponse.json(
         { error: "Quote not found" },
         { status: 404 }
       );
     }
 
-    console.log("📦 Moving quote:", pending.text);
-    await Quote.create({
+    console.log("✅ [APPROVE] Found pending quote:", pending.text);
+    console.log("📨 [APPROVE] Creating in Quote collection...");
+    
+    const created = await Quote.create({
       text: pending.text,
       author: pending.author
     });
-    console.log("✅ Added to Quote collection");
+    
+    console.log("✅ [APPROVE] Quote created in Quote collection:", created._id);
+    console.log("📨 [APPROVE] Deleting from PendingQuote...");
 
-    await PendingQuote.findByIdAndDelete(quoteId);
-    console.log("✅ Deleted from PendingQuote collection");
+    const deleted = await PendingQuote.findByIdAndDelete(quoteId);
+    console.log("✅ [APPROVE] Deleted from PendingQuote:", deleted._id);
 
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true, quoteId: created._id });
   } catch (error) {
-    console.error("❌ Approve error:", error);
+    console.error("❌ [APPROVE] ERROR:", error);
     return NextResponse.json(
       { error: error instanceof Error ? error.message : "Approve failed" },
       { status: 500 }
